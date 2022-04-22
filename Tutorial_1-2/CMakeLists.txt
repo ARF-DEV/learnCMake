@@ -2,11 +2,22 @@ cmake_minimum_required(VERSION 3.10)
 
 project(Tutorial_1)
 
+# set(CMAKE_WINDOWS_EXPORT_ALL_SYMBOLS ON)
 add_executable(${PROJECT_NAME} main.cpp)
+add_subdirectory(adder)
+add_subdirectory(external/glfw)
 
-add_subdirectory(Adder)
+target_include_directories(${PROJECT_NAME} 
+     PRIVATE adder
+     PRIVATE external/glfw/include 
+)
 
-target_link_directories(${PROJECT_NAME} PRIVATE adder)
+target_link_directories(${PROJECT_NAME} 
+     PRIVATE adder
+     PRIVATE external/glfw/src
+)
 
-
-target_link_libraries(${PROJECT_NAME} adder)
+target_link_libraries(${PROJECT_NAME} 
+     adder 
+     glfw
+)
